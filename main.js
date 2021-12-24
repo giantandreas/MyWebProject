@@ -37,9 +37,9 @@ scene.add(pointLight, ambientLight);
 
 // SOME HELPER
 const lightHelper = new THREE.PointLightHelper(pointLight);
-const gridHelper = new THREE.GridHelper(200, 50);
+// const gridHelper = new THREE.GridHelper(200, 50);
 
-scene.add(lightHelper, gridHelper)
+scene.add(lightHelper)
 
 // CONTROLLER
 const controller = new OrbitControls(camera, renderer.domElement)
@@ -60,6 +60,20 @@ function addStar(){
 
     Array(150).fill().forEach(createStarObj)
 }
+
+// SCENE BACKGROUND
+const bgTexture = new THREE.TextureLoader().load('./img/space.jpg');
+scene.background = bgTexture;
+
+
+//
+const earthTexture = new THREE.TextureLoader().load('./img/earth.jpg');
+const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(3, 32, 32),
+    new THREE.MeshBasicMaterial({map: earthTexture})
+);
+
+scene.add(earth);
 
 addStar()
 
